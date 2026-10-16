@@ -1,0 +1,25 @@
+{
+  "name": "amurland-online",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server",
+    "shared"
+  ],
+  "scripts": {
+    "dev": "concurrently --kill-others-on-fail --names SERVER,CLIENT \"npm run dev --workspace @amurland/server\" \"npm run dev --workspace @amurland/client\"",
+    "build": "npm run build --workspace @amurland/shared && npm run build --workspace @amurland/server && npm run build --workspace @amurland/client",
+    "typecheck": "npm run build --workspace @amurland/shared && npm run typecheck --workspace @amurland/server && npm run typecheck --workspace @amurland/client",
+    "start": "npm run start --workspace @amurland/server",
+    "postinstall": "npm run build --workspace @amurland/shared",
+    "test": "npm run build --workspace @amurland/shared && npm run test --workspace @amurland/server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}

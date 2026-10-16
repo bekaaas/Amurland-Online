@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: amurland-online
+    runtime: node
+    plan: free
+    region: frankfurt
+    rootDir: .
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    numInstances: 1
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_ENV
+        value: production
